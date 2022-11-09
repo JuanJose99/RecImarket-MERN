@@ -26,8 +26,15 @@ async function getProducts(req, res) {
 
 async function createProduct(req, res) {
   try {
-    const { name, description, price } = req.body;
-    const product = new Product({ name, description, price });
+    const { name, description, price, slug, category, image } = req.body;
+    const product = new Product({
+      name,
+      description,
+      slug,
+      category,
+      image,
+      price,
+    });
     await product.save();
     res.json({ status: "Product add" });
   } catch (error) {
