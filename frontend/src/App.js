@@ -1,16 +1,22 @@
-import React from "react";
+import {React, useContext} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
-
 import Logo from "./components/logo";
+import {Store, StoreProvider}  from "./Store";
+import CartScreen from "./screens/CartScreen";
+
 
 export default function App() {
+  const { state } = useContext(Store);
+  const { cart } = state;
+
   return (
     <BrowserRouter>
       <div className="d-flex flex-column">
@@ -21,6 +27,14 @@ export default function App() {
                 <Logo />
               </Navbar.Brand>
               <Nav className="justify-content-end">
+                <Nav.Link to="/cart">
+                  Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.reduce((a,c)=>a+c.quantify, 0)}
+                    </Badge>
+                  )}
+                </Nav.Link>
                 <Nav.Link href="/signup">Registrarse</Nav.Link>
                 <Nav.Link href="/login">Iniciar sesion</Nav.Link>
               </Nav>
@@ -32,6 +46,7 @@ export default function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>
