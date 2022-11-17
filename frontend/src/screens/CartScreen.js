@@ -1,7 +1,7 @@
 import { React, useContext } from "react";
-import { Store } from "../Store";
+import { Store } from "../store";
 import { Row, Col } from "react-bootstrap/esm";
-import MessageBox from "../components/messageBox";
+import MessageBox from "../components/message/message";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";

@@ -1,17 +1,26 @@
 const User = require("../models/auth");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 async function login(req, res) {
+  const { email, password } = req.body;
+  let hashedPass = crypto
+    .createHash("sha512")
+    .update(password)
+    .digest("hex");
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email: email }).exec();
-    console.log(req.body);
-    if (!user) {
-      return res.json("El usuario no esta registrado");
-    }
-    if (password != user.password) {
-      return res.json("Contraseña incorrecta");
-    }
-    res.json(`Bienvenido ${user.name} ${user.lastname}`);
+    const user = await User.findOne({ email: email, password: hashedPass }, function (err, user) {
+      let response = {
+        token:null
+      }
+      if (user) {
+        response.token = jwt.sign({
+          id: user._id,
+          user: user.email
+        }, "_recret_",{expiresIn: '12h'})
+      }
+      res.json(response);
+    })
   } catch (error) {
     console.error(error);
     return res.status(500).json({

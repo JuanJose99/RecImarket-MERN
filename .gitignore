@@ -1,5 +1,6 @@
 /backend/docker-compose.yml
 /frontend/node_modules
+/backend/node_modules
 /frontend/.pnp
 /frontend/.pnp.js
 /frontend/public/image

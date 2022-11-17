@@ -1,4 +1,4 @@
-import {React, useContext} from "react";
+import { React, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -6,12 +6,11 @@ import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
-import Login from "./screens/Login";
-import Signup from "./screens/Signup";
-import Logo from "./components/logo";
-import {Store, StoreProvider}  from "./Store";
+import Login from "./components/login/login";
+import Signup from "./components/signup/signup";
+import Logo from "./components/logo/logo";
+import { Store } from "./store";
 import CartScreen from "./screens/CartScreen";
-
 
 export default function App() {
   const { state } = useContext(Store);
@@ -31,7 +30,7 @@ export default function App() {
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
-                      {cart.cartItems.reduce((a,c)=>a+c.quantify, 0)}
+                      {cart.cartItems.reduce((a, c) => a + c.quantify, 0)}
                     </Badge>
                   )}
                 </Nav.Link>

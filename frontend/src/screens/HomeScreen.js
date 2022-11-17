@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
 import { Row, Col } from "react-bootstrap/esm";
-import Product from "../components/products";
+import Product from "../components/product/product";
 import data from "../data.js"
 
 const reducer = (state, action) => {
