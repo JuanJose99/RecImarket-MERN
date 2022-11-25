@@ -39,6 +39,7 @@ async function createProduct(req, res) {
       category,
       image,
       price,
+      countInStock,
     });
     await product.save();
     res.json({ status: "Product add" });
