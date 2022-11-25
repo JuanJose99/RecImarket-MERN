@@ -4,12 +4,12 @@ const product = require("../controllers/product");
 
 router.get("/", product.getProducts);
 
-router.get("/:id", product.getProduct);
-
 router.post("/", product.createProduct);
 
 router.patch("/:id", product.updateProduct);
 
 router.delete("/:id", product.deleteProduct);
+
+router.get("/slug/:slug", product.getProduct);
 
 module.exports = router;

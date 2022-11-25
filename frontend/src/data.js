@@ -7,6 +7,7 @@ const data = {
       image: "/image/maceteros-con-forma-de-gatos.jpg",
       price: "4500",
       description: "Maceta hecha en plastico reciclado",
+      countInStock:10,
     },
     {
       name: "Adorno de metal",
@@ -15,6 +16,7 @@ const data = {
       image: "/image/adorno-metal.jpg",
       price: "8000",
       description: "Adorno hecho en restos de metal reciclable",
+      countInStock:10,
     },
     {
       name: "Cajas decorativas",
@@ -23,6 +25,7 @@ const data = {
       image: "/image/cajas_de_fresas_convertidas.jpg",
       price: "10000",
       description: "Caja hecha de madera reciclada",
+      countInStock:10,
     },
     {
       name: "Conjunto de salon",
@@ -31,6 +34,7 @@ const data = {
       image: "/image/conjunto-de-salon.jpg",
       price: "20000",
       description: "Juego de salon hecho en plastico reciclado",
+      countInStock:10,
     },
   ],
 };

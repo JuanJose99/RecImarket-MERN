@@ -5,12 +5,14 @@ import MessageBox from "../components/message/message";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 export default function CartScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
+  console.log("cartItems from cartscreen", cartItems);
   return (
     <div>
       <h1>Carrito de Compras</h1>
@@ -18,8 +20,7 @@ export default function CartScreen() {
         <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              No hay productos en el carrito.{""}
-              <Link to="/">Ir a comprar</Link>
+              No hay productos en el carrito. <Link to="/">Ir a comprar</Link>
             </MessageBox>
           ) : (
             <ListGroup>
@@ -55,7 +56,31 @@ export default function CartScreen() {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}></Col>
+        <Col md={4}>
+          <Card>
+            <Card.Body>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <h3>
+                    Subtotal ({cartItems.reduce((a, c) => a + c.quantify, 0)} )
+                    : ${cartItems.reduce((a, c) => a + c.price * c.quantify, 0)}
+                  </h3>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    disabled={cartItems.length === 0}
+                  >
+                    {" "}
+                    Ir a pagar
+                  </Button>{" "}
+                  <Link to="/">Ir a comprar</Link>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </div>
   );

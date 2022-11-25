@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function login() {
+export default function Signup() {
   return (
     <div
       className="container text-center"

@@ -2,8 +2,13 @@ const Product = require("../models/product");
 
 async function getProduct(req, res) {
   try {
-    const product = await Product.findById(req.params.id);
-    res.json(product);
+    const product = await Product.findOne({ slug: req.params.slug }).exec();
+    console.log(product);
+    if (product) {
+      res.send(product);
+    } else {
+      res.status(404).send({ message: "Producto no encontrado" });
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).json({
