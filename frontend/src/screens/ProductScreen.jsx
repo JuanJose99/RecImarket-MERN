@@ -10,6 +10,7 @@ import { Store } from "../store";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
+import Rating from "../components/rating/rating";
 
 const baseURL = "http://localhost:3001";
 
@@ -54,9 +55,8 @@ function ProductScreen() {
 
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
-    console.log("existe item", existItem);
     const quantify = existItem ? existItem.quantify + 1 : 1;
-    const { data } = await axios.get(`${baseURL}/api/products`);
+    const { data } = await axios.get(`${baseURL}/api/products/${product._id}`);
     if (data.countInStock < quantify) {
       window.alert("El producto esta fuera de stock");
       return;
@@ -86,6 +86,12 @@ function ProductScreen() {
         <ListGroup variant="flush">
           <ListGroup.Item>
             <h1>{product.name}</h1>
+          </ListGroup.Item>
+          <ListGroup.Item>
+            <Rating
+              rating={product.rating}
+              numReviews={product.numReviews}
+            ></Rating>
           </ListGroup.Item>
           <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
           <ListGroup.Item>

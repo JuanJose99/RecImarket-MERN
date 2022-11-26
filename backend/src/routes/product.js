@@ -10,6 +10,8 @@ router.patch("/:id", product.updateProduct);
 
 router.delete("/:id", product.deleteProduct);
 
-router.get("/slug/:slug", product.getProduct);
+router.get("/slug/:slug", product.getProductBySlug);
+
+router.get("/:id", product.getProductById);
 
 module.exports = router;

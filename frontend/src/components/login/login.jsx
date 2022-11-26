@@ -28,10 +28,7 @@ export default class Login extends React.Component {
           //Si genera alerta - es porque es nulo el token
           alert("usuario y/o contraseña invalidas");
         } else {
-          console.log("redirigir");
-          //   return redirect("/");
           <Component history={window.open("/home")} />;
-          //   this.props.history.push(window.open("/home")); //login ok ? redirije a index
         }
       })
 

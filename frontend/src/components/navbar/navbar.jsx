@@ -14,7 +14,7 @@ export const Navbar = () => {
           <Logo />
         </RBNavbar.Brand>
         <Nav className="justify-content-end">
-          <Nav.Link href="/cart">
+          <Nav.Link href={"/cart"}>
             Cart
             {cart.cartItems.length > 0 && (
               <Badge pill bg="danger">

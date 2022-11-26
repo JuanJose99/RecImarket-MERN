@@ -6,13 +6,32 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
+import { FaPlusCircle, FaMinusCircle, FaTrash } from "react-icons/fa";
 
 export default function CartScreen() {
+  const baseURL = "http://localhost:3001";
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
-  console.log("cartItems from cartscreen", cartItems);
+
+  const updateCartHandler = async (item, quantify) => {
+    const { data } = await axios.get(`${baseURL}/api/products/${item._id}`);
+    if (data.countInStock < quantify) {
+      window.alert("El producto esta fuera de stock");
+      return;
+    }
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...item, quantify },
+    });
+  };
+
+  const removeItemHandler = (item) => {
+    ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
+
   return (
     <div>
       <h1>Carrito de Compras</h1>
@@ -20,7 +39,8 @@ export default function CartScreen() {
         <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              No hay productos en el carrito. <Link to="/">Ir a comprar</Link>
+              No hay productos en el carrito.{" "}
+              <Link to="/home">Ir a comprar</Link>
             </MessageBox>
           ) : (
             <ListGroup>
@@ -36,18 +56,36 @@ export default function CartScreen() {
                       <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
-                      <Button variant="ligth" disable={item.quantity === 1}>
-                        <i className="fas fa-plus.circle"></i>
+                      <Button
+                        onClick={() =>
+                          updateCartHandler(item, item.quantify - 1)
+                        }
+                        variant="ligth"
+                        disable={item.quantity === 1}
+                      >
+                        <FaMinusCircle />
+                        {/* <i className="fas fa-minus-circle"></i> */}
                       </Button>{" "}
-                      <span>{item.quantity}</span>{" "}
-                      <Button variant="ligth" disable={item.quantity === 1}>
-                        <i className="fas fa-plus.circle"></i>
+                      <span>{item.quantity}</span>
+                      <Button
+                        onClick={() =>
+                          updateCartHandler(item, item.quantify + 1)
+                        }
+                        variant="ligth"
+                        disable={item.quantity === 1}
+                      >
+                        <FaPlusCircle />
+
+                        <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
                     <Col md={3}>$ {item.price}</Col>
                     <Col md={2}>
-                      <Button variant="ligth">
-                        <i className="fas fa-trash"></i>
+                      <Button
+                        onClick={() => removeItemHandler(item)}
+                        variant="ligth"
+                      >
+                        <FaTrash />
                       </Button>
                     </Col>
                   </Row>
@@ -75,7 +113,6 @@ export default function CartScreen() {
                     {" "}
                     Ir a pagar
                   </Button>{" "}
-                  <Link to="/">Ir a comprar</Link>
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>
