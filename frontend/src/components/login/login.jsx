@@ -17,8 +17,7 @@ export default class Login extends React.Component {
   }
 
   login() {
-    axios
-      .post(`${APIHOST}/auth/login`, {
+    axios.post(`${APIHOST}/auth/login`, {
         //localhost:3001/usuarios/login la ruta para obtener el token
         email: this.state.email,
         password: this.state.password,

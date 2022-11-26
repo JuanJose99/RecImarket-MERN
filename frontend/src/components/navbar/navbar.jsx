@@ -13,7 +13,9 @@ export const Navbar = () => {
         <RBNavbar.Brand href="/">
           <Logo />
         </RBNavbar.Brand>
+        
         <Nav className="justify-content-end">
+        <Nav.Link href="/recimarketIndex">Inicio</Nav.Link>
           <Nav.Link href={"/cart"}>
             Cart
             {cart.cartItems.length > 0 && (
@@ -24,6 +26,7 @@ export const Navbar = () => {
           </Nav.Link>
           <Nav.Link href="/signup">Registrarse</Nav.Link>
           <Nav.Link href="/">Iniciar sesion</Nav.Link>
+          
         </Nav>
       </Container>
     </RBNavbar>

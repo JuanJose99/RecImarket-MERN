@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import app from "../app.json";
 
-const { APIHOST } = app;
+const {APIHOST} = app;
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -16,8 +16,7 @@ export default class Signup extends React.Component {
   }
 
   signup() {
-    axios
-      .post(`${APIHOST}/auth/signup`, {
+    axios.post(`${APIHOST}/auth/signup`, {
         name: this.state.name,
         lastname: this.state.lastname,
         email: this.state.email,

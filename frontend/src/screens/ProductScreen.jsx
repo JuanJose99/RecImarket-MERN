@@ -11,8 +11,10 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Rating from "../components/rating/rating";
+import app from "../components/app.json"
 
-const baseURL = "http://localhost:3001";
+const {APIHOST} = app;
+// const baseURL = "http://localhost:3001";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -41,7 +43,7 @@ function ProductScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get(`${baseURL}/api/products/slug/${slug}`);
+        const result = await axios.get(`${APIHOST}/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
@@ -56,7 +58,7 @@ function ProductScreen() {
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantify = existItem ? existItem.quantify + 1 : 1;
-    const { data } = await axios.get(`${baseURL}/api/products/${product._id}`);
+    const { data } = await axios.get(`${APIHOST}/api/products/${product._id}`);
     if (data.countInStock < quantify) {
       window.alert("El producto esta fuera de stock");
       return;

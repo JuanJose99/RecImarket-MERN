@@ -5,6 +5,7 @@ import HomeScreen from "../../screens/HomeScreen";
 import CartScreen from "../../screens/CartScreen";
 import Login from "../login/login";
 import Signup from "../signup/signup";
+import RecimarketIndex from "../../screens/RecimarketIndex"
 
 export default function App() {
   return (
@@ -15,9 +16,10 @@ export default function App() {
         <Route exact path="/cart" element={<CartScreen />} />
         <Route exact path="/" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/RecimarketIndex" element={<RecimarketIndex />}/>
         <Route
           path={"*"}
-          component={() => (
+          element={() => (
             <h1 style={{ marginTop: 300 }}>
               {" "}
               404 <br />

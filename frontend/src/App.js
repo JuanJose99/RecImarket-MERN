@@ -7,7 +7,7 @@ import AppRoutes from "./components/router/router";
 export default function App() {
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      <Navbar />
       <Container>
         <AppRoutes/>
       </Container>

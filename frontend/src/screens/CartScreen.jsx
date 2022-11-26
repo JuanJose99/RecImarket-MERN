@@ -8,16 +8,20 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { FaPlusCircle, FaMinusCircle, FaTrash } from "react-icons/fa";
+import app from "../components/app.json"
+
+
 
 export default function CartScreen() {
-  const baseURL = "http://localhost:3001";
+  const {APIHOST} = app;
+  // const baseURL = "http://localhost:3001";
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
 
   const updateCartHandler = async (item, quantify) => {
-    const { data } = await axios.get(`${baseURL}/api/products/${item._id}`);
+    const { data } = await axios.get(`${APIHOST}/api/products/${item._id}`);
     if (data.countInStock < quantify) {
       window.alert("El producto esta fuera de stock");
       return;
